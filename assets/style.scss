@@ -63,7 +63,7 @@ p {
  
 
 .wrapper{
-    max-width: 1440px;
+    max-width: 860px;
     margin: 0 auto;
     padding: 0 20px;
     display: flex;
@@ -88,12 +88,85 @@ h1{
 
 .keyboard{
     margin-top: 10px;
+    padding: 10px;
     display: flex;
-    width: 100%;
-    height: 100px;
+    flex-wrap: wrap;
+    width: 100%;    
     border: solid 4px #000;
     border-radius: 5px;
-    background-color: rgb(107, 107, 107);
+    background-color: rgb(131, 131, 131);
+
+    .keyboard-row{
+        display: flex;        
+        justify-content: space-between;
+        height: 40px;
+        width: 100%;
+        margin-bottom: 10px;
+        &:last-child{
+            margin-bottom: 0;
+        }
+        .key{
+            display: flex;
+            width: 45px;
+            height: 45px;
+            background-color: rgb(82, 82, 82);
+            border-radius: 3px;
+            color: #fff;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Roboto-Regular';
+            font-size: 16px;
+            letter-spacing: 1px; 
+            transition: .4s;
+            cursor: pointer;
+            &:hover{
+                background-color: rgb(66, 5, 5);
+                transition: .3s;
+            }           
+        }
+        .backspace{
+            width: 90px;
+            background-color: rgb(41, 40, 40);            
+        }
+        .tab{
+            width: 75px;
+            background-color: rgb(41, 40, 40);                        
+        }
+        .del{   
+            width: 55px;         
+            background-color: rgb(41, 40, 40);
+        }
+        .caps-lock{   
+            width: 120px;         
+            background-color: rgb(41, 40, 40);            
+        }
+        .enter{   
+            width: 100px;         
+            background-color: rgb(41, 40, 40);            
+        }
+        .shift{   
+            width: 115px;         
+            background-color: rgb(41, 40, 40);            
+        }
+        .ctrl{   
+            width: 60px;         
+            background-color: rgb(41, 40, 40);            
+        }
+        .win{   
+            width: 60px;         
+            background-color: rgb(41, 40, 40);
+        }
+        .alt{   
+            width: 60px;         
+            background-color: rgb(41, 40, 40);            
+        }
+        .space{   
+            width: 320px;     
+        }
+        .arrow{                      
+            background-color: rgb(41, 40, 40);
+        }
+    }
 }
 
 

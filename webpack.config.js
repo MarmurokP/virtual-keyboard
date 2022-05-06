@@ -40,7 +40,5 @@ module.exports = {
     static: './dist',
     port: '5505',
   },
-  // optimization: {
-  //   runtimeChunk: 'single',
-  // },
+  
 };
