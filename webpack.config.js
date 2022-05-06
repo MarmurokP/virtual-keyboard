@@ -8,6 +8,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     clean: true
   },
+  mode: 'development',
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Virtual Keyboard',
@@ -35,4 +36,11 @@ module.exports = {
       },
     ],
   },
+  devServer: {
+    static: './dist',
+    port: '5505',
+  },
+  // optimization: {
+  //   runtimeChunk: 'single',
+  // },
 };
