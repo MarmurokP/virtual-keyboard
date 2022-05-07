@@ -65,7 +65,7 @@ p {
 .wrapper{
     max-width: 860px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 30px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -103,7 +103,7 @@ h1{
         width: 100%;
         margin-bottom: 10px;
         &:last-child{
-            margin-bottom: 0;
+            margin-bottom: 5px;
         }
         .key{
             display: flex;
@@ -114,22 +114,36 @@ h1{
             color: #fff;
             align-items: center;
             justify-content: center;
-            font-family: 'Roboto-Regular';
-            font-size: 16px;
+            font-family: 'Roboto-Regular';            
+            font-size: 18px;
             letter-spacing: 1px; 
             transition: .4s;
             cursor: pointer;
             &:hover{
                 background-color: rgb(66, 5, 5);
                 transition: .3s;
-            }           
+            } 
+            &:active{
+                transition: .3s;
+                background-color: rgb(107, 62, 62);               
+            }          
+        }        
+        .up-row{
+            align-self: flex-start;
+            margin: 4px 0 0 0;
+            opacity: 50%;
+        }
+        .down-row{
+            align-self: flex-end;
+            margin: 0 0 3px 12px;
+            opacity: 50%;
         }
         .backspace{
-            width: 90px;
+            width: 120px;
             background-color: rgb(41, 40, 40);            
         }
         .tab{
-            width: 75px;
+            width: 65px;
             background-color: rgb(41, 40, 40);                        
         }
         .del{   
@@ -165,6 +179,12 @@ h1{
         }
         .arrow{                      
             background-color: rgb(41, 40, 40);
+        }
+        .active{
+            opacity: 100%;
+        }
+        .upper-case{
+            text-transform: uppercase;
         }
     }
 }
