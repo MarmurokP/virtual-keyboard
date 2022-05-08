@@ -51,7 +51,7 @@ for(let i = 0; i < 14; i++){
     key.className = `key`;      
     keyboardRowArr[0].appendChild(key); 
     if(i < 13){
-        key.innerHTML = `<p class="up-row">${keysObj[0][i]}</p><br><p class="down-row active">${keysObj[1][i]}</p>`;
+        key.innerHTML = `<p class="up-row">${keysObj[0][i]}</p><br><p class="down-row active-key">${keysObj[1][i]}</p>`;
     };      
 };
 
@@ -61,9 +61,9 @@ for(let i = 0; i < 15; i++){
     keyboardRowArr[1].appendChild(key);
     if(i > 0 && i < 14){
         if(i > 10){
-            key.innerHTML = `<p class="up-row">${keysObj[3][i]}</p><br><p class="down-row active">${keysObj[2][i]}</p>`;
+            key.innerHTML = `<p class="up-row">${keysObj[3][i]}</p><br><p class="down-row active-key">${keysObj[2][i]}</p>`;
         } else {
-            key.innerHTML = `<p class="key-case">${keysObj[2][i]}</p>`;
+            key.innerHTML = `<p class="key-case active-key">${keysObj[2][i]}</p>`;
         };        
     }; 
 };
@@ -74,9 +74,9 @@ for(let i = 0; i < 13; i++){
     keyboardRowArr[2].appendChild(key); 
     if(i > 0 && i < 12){
         if(i > 9){
-            key.innerHTML = `<p class="up-row">${keysObj[5][i]}</p><br><p class="down-row active">${keysObj[4][i]}</p>`;
+            key.innerHTML = `<p class="up-row">${keysObj[5][i]}</p><br><p class="down-row active-key">${keysObj[4][i]}</p>`;
         } else {
-            key.innerHTML = `<p class="key-case">${keysObj[4][i]}</p>`;
+            key.innerHTML = `<p class="key-case active-key">${keysObj[4][i]}</p>`;
         };        
     };
 };
@@ -87,9 +87,9 @@ for(let i = 0; i < 13; i++){
     keyboardRowArr[3].appendChild(key);
     if(i > 0 && i < 11){
         if(i > 7){
-            key.innerHTML = `<p class="up-row">${keysObj[7][i]}</p><br><p class="down-row active">${keysObj[6][i]}</p>`;
+            key.innerHTML = `<p class="up-row">${keysObj[7][i]}</p><br><p class="down-row active-key">${keysObj[6][i]}</p>`;
         } else {
-            key.innerHTML = `<p class="key-case">${keysObj[6][i]}</p>`;
+            key.innerHTML = `<p class="key-case active-key">${keysObj[6][i]}</p>`;
         }; 
     };
 };    
@@ -104,56 +104,104 @@ for(let i = 0; i < 9; i++){
 
 const keysArr = document.querySelectorAll('.key');
 const keyCase = document.querySelectorAll('.key-case');
-
+const activeKeys = document.querySelectorAll('.active-key');
 
 
 
 keysArr[13].className = 'key backspace';
-keysArr[13].innerHTML = 'Backspace';
+keysArr[13].innerHTML = `<p class='speckey' id='Backspace'>Backspace</p>`;
 keysArr[14].className = 'key tab';
-keysArr[14].innerHTML = 'Tab';
+keysArr[14].innerHTML = `<p class='speckey' id='Tab'>Tab</p>`;
 keysArr[28].className = 'key del';
-keysArr[28].innerHTML = 'Delet';
+keysArr[28].innerHTML = `<p class='speckey' id='Delete'>Del</p>`;
 keysArr[29].className = 'key caps-lock';
 const capsLock = keysArr[29];
-keysArr[29].innerHTML = 'Caps Lock';
+keysArr[29].innerHTML = `<p class='speckey' id='CapsLock'>Caps Lock</p>`;
 keysArr[41].className = 'key enter';
-keysArr[41].innerHTML = 'Enter';
+keysArr[41].innerHTML = `<p class='speckey' id='Enter'>Enter</p>`;
 keysArr[42].className = 'key shift';
-keysArr[42].innerHTML = 'Shift';
+keysArr[42].innerHTML = `<p class='speckey' id='ShiftLeft'>Shift</p>`;
 keysArr[53].className = 'key arrow arrow-up';
-keysArr[53].innerHTML = '&uarr;';
+keysArr[53].innerHTML = `<p class='speckey' id='ArrowUp'>&uarr;</p>`;
 keysArr[54].className = 'key shift';
-keysArr[54].innerHTML = 'Shift';
+keysArr[54].innerHTML = `<p class='speckey' id='ShiftRight'>Shift</p>`;
 keysArr[55].className = 'key ctrl';
-keysArr[55].innerHTML = 'Ctrl';
+keysArr[55].innerHTML = `<p class='speckey' id='ControlLeft'>Ctrl</p>`;
 keysArr[56].className = 'key win';
-keysArr[56].innerHTML = 'Win';
+keysArr[56].innerHTML = `<p class='speckey' id='MetaLeft'>Win</p>`;
 keysArr[57].className = 'key alt';
-keysArr[57].innerHTML = 'Alt';
+keysArr[57].innerHTML = `<p class='speckey' id='AltLeft'>Alt</p>`;
 keysArr[58].className = 'key space';
+keysArr[58].innerHTML = `<p class='speckey' id='Space'></p>`;
 keysArr[59].className = 'key alt';
-keysArr[59].innerHTML = 'Alt';
+keysArr[59].innerHTML = `<p class='speckey' id='AltRight'>Alt</p>`;
 keysArr[60].className = 'key arrow arrow-left';
-keysArr[60].innerHTML = '&larr;';
+keysArr[60].innerHTML = `<p class='speckey' id='ArrowLeft'>&larr;</p>`;
 keysArr[61].className = 'key arrow arrow-down';
-keysArr[61].innerHTML = '&darr;';
+keysArr[61].innerHTML = `<p class='speckey' id='ArrowDown'>&darr;</p>`;
 keysArr[62].className = 'key arrow arrow-right';
-keysArr[62].innerHTML = '&rarr;';
+keysArr[62].innerHTML = `<p class='speckey' id='ArrowRight'>&rarr;</p>`;
 keysArr[63].className = 'key ctrl';
-keysArr[63].innerHTML = 'Ctrl';
+keysArr[63].innerHTML = `<p class='speckey' id='ControlRight'>Ctrl</p>`;
 
-function switchCase(){
+function switchCase(){         
     keyCase.forEach((el) =>{
-        el.classList.toggle('upper-case');
-       });
+        
+        if(el.classList.contains('upper-case')){
+            el.classList.remove('upper-case');
+            el.textContent = el.textContent.toLowerCase();                       
+        } else {
+            el.textContent = el.textContent.toUpperCase();            
+            el.classList.add('upper-case');             
+        }        
+    });           
 }
 
+
 capsLock.addEventListener('click', switchCase);
-document.addEventListener('keyup', (event) => {
-    if(event.getModifierState('CapsLock')){
-       switchCase();
-    } else {
-        switchCase();
+document.addEventListener('keydown', (event) => {    
+    if(event.key === 'CapsLock'){        
+       switchCase();              
     }
 })
+
+// Keys lighter on click
+
+const specKeys = document.querySelectorAll('.speckey');
+
+document.onkeydown = function (event) {
+    specKeys.forEach((el) => {
+        if(el.id === event.code){
+            el.closest('.key').style.backgroundColor = 'rgb(107, 62, 62)';
+        }
+    })
+
+activeKeys.forEach((el) => {
+    if(el.textContent === event.key){
+        el.closest('.key').style.backgroundColor = 'rgb(107, 62, 62)';
+    }        
+})
+}
+
+document.onkeyup = function (event) {
+    specKeys.forEach((el) => {
+        if(el.id === event.code){
+            el.closest('.key').style.backgroundColor = 'rgb(41, 40, 40)';
+        }
+    })
+    activeKeys.forEach((el) => {
+        if(el.textContent === event.key){
+            el.closest('.key').style.backgroundColor = 'rgb(82, 82, 82)';
+        }        
+    })
+}   
+
+function printFromVirtKeyboard(){   
+        activeKeys.forEach((button, index) => {
+            button.closest('.key').addEventListener('click', () => {
+            textArea.value += `${activeKeys[index].textContent}`;
+        })
+    });       
+};
+printFromVirtKeyboard();
+
