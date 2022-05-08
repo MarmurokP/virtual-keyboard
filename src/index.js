@@ -104,8 +104,7 @@ for(let i = 0; i < 9; i++){
 
 const keysArr = document.querySelectorAll('.key');
 const keyCase = document.querySelectorAll('.key-case');
-const activeKeys = document.querySelectorAll('.active-key');
-
+let activeKeys = document.querySelectorAll('.active-key');
 
 
 keysArr[13].className = 'key backspace';
@@ -119,11 +118,11 @@ const capsLock = keysArr[29];
 keysArr[29].innerHTML = `<p class='speckey' id='CapsLock'>Caps Lock</p>`;
 keysArr[41].className = 'key enter';
 keysArr[41].innerHTML = `<p class='speckey' id='Enter'>Enter</p>`;
-keysArr[42].className = 'key shift';
+keysArr[42].className = 'key shift shift-left';
 keysArr[42].innerHTML = `<p class='speckey' id='ShiftLeft'>Shift</p>`;
 keysArr[53].className = 'key arrow arrow-up';
 keysArr[53].innerHTML = `<p class='speckey' id='ArrowUp'>&uarr;</p>`;
-keysArr[54].className = 'key shift';
+keysArr[54].className = 'key shift shift-right';
 keysArr[54].innerHTML = `<p class='speckey' id='ShiftRight'>Shift</p>`;
 keysArr[55].className = 'key ctrl';
 keysArr[55].innerHTML = `<p class='speckey' id='ControlLeft'>Ctrl</p>`;
@@ -144,6 +143,8 @@ keysArr[62].innerHTML = `<p class='speckey' id='ArrowRight'>&rarr;</p>`;
 keysArr[63].className = 'key ctrl';
 keysArr[63].innerHTML = `<p class='speckey' id='ControlRight'>Ctrl</p>`;
 
+// Switching upper and lower case
+
 function switchCase(){         
     keyCase.forEach((el) =>{
         
@@ -154,16 +155,113 @@ function switchCase(){
             el.textContent = el.textContent.toUpperCase();            
             el.classList.add('upper-case');             
         }        
-    });           
-}
-
+    });            
+};
 
 capsLock.addEventListener('click', switchCase);
 document.addEventListener('keydown', (event) => {    
     if(event.key === 'CapsLock'){        
        switchCase();              
     }
+});
+
+// Shift key perfomance
+
+const leftShift = document.querySelector('.shift-left');
+const rightShift = document.querySelector('.shift-right');
+const upRowKeys = document.querySelectorAll('.up-row');
+const downRowKeys = document.querySelectorAll('.down-row');
+let down = false;
+
+function rowSwiching(){
+    upRowKeys.forEach((el) => {
+        el.classList.toggle('active-key');
+    })
+    downRowKeys.forEach((el) => {
+        el.classList.toggle('active-key');
+    })
+    switchCase();
+    activeKeys = document.querySelectorAll('.active-key');  
+}
+
+leftShift.addEventListener('click', rowSwiching);
+rightShift.addEventListener('click', rowSwiching);
+
+document.addEventListener('keydown', (event) => {
+    if(down) return;
+    down = true;
+    if(event.key === 'Shift'){
+       rowSwiching();
+    }
 })
+
+
+document.addEventListener('keyup', (event) => {
+    if(event.key === 'Shift'){
+       rowSwiching();
+    }
+    down = false;
+})
+
+// Backspace and Delet keys event
+
+const backspaceKey = document.querySelector('.backspace');
+const deletKey = document.querySelector('.del');
+
+function getCaret(el) {
+    if (el.selectionStart) {
+        return el.selectionStart;
+    } else if (document.selection) {
+        el.focus();
+
+        let r = document.selection.createRange();
+        if (r == null) {
+            return 0;
+        }
+
+        let re = el.createTextRange(),
+            rc = re.duplicate();
+        re.moveToBookmark(r.getBookmark());
+        rc.setEndPoint('EndToStart', re);
+
+        return rc.text.length;
+    }
+    return 0;
+}
+
+function resetCursor(txtElement, currentPos) { 
+    if (txtElement.setSelectionRange) { 
+        txtElement.focus(); 
+        txtElement.setSelectionRange(currentPos, currentPos); 
+    } else if (txtElement.createTextRange) { 
+        let range = txtElement.createTextRange();  
+        range.moveStart('character', currentPos); 
+        range.select(); 
+    } 
+}
+
+function backspaceClick() {
+    let currentPos = getCaret(textArea);    
+    let text = textArea.value;
+    let backSpace = text.substr(0, currentPos-1) + text.substr(currentPos, text.length);
+
+    textArea.value = backSpace;
+    
+    resetCursor(textArea, currentPos-1);
+}
+
+function deletClick() {
+    let currentPos = getCaret(textArea);    
+    let text = textArea.value;
+    let backSpace = text.substr(0, currentPos) + text.substr(currentPos+1, text.length);
+
+    textArea.value = backSpace;
+    
+    resetCursor(textArea, currentPos);
+}
+
+backspaceKey.addEventListener('click', backspaceClick);
+deletKey.addEventListener('click', deletClick);
 
 // Keys lighter on click
 
@@ -194,14 +292,19 @@ document.onkeyup = function (event) {
             el.closest('.key').style.backgroundColor = 'rgb(82, 82, 82)';
         }        
     })
-}   
+}  
+
+// Print from VirtualKeyboard
 
 function printFromVirtKeyboard(){   
-        activeKeys.forEach((button, index) => {
-            button.closest('.key').addEventListener('click', () => {
-            textArea.value += `${activeKeys[index].textContent}`;
-        })
-    });       
+    activeKeys.forEach((button, index) => {
+        button.closest('.key').addEventListener('click', () => {
+        textArea.value += `${activeKeys[index].textContent}`;
+        textArea.focus(); 
+        });
+    });
+          
 };
+
 printFromVirtKeyboard();
 
