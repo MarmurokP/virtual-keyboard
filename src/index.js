@@ -253,15 +253,83 @@ function backspaceClick() {
 function deletClick() {
     let currentPos = getCaret(textArea);    
     let text = textArea.value;
-    let backSpace = text.substr(0, currentPos) + text.substr(currentPos+1, text.length);
+    let deletChar = text.substr(0, currentPos) + text.substr(currentPos+1, text.length);
 
-    textArea.value = backSpace;
+    textArea.value = deletChar;
     
     resetCursor(textArea, currentPos);
 }
 
 backspaceKey.addEventListener('click', backspaceClick);
 deletKey.addEventListener('click', deletClick);
+
+// Space attrib
+
+const spaceKey = document.querySelector('.space');
+
+spaceKey.addEventListener('click', () => {    
+    textArea.value += " ";
+    textArea.focus();
+});
+
+// Enter key click add
+
+const enterKey = document.querySelector('.enter');
+
+enterKey.addEventListener('click', () => {
+    textArea.value += `\n`;
+    textArea.focus();
+});
+
+//Tab key click add
+
+const tabKey = document.querySelector('.tab');
+
+// function tabClick() {
+//     let currentPos = getCaret(textArea);    
+//     let text = textArea.value;
+//     let tabSpace = text.substr(0, currentPos) + text.substr(currentPos, text.length);
+
+//     textArea.value = tabSpace;
+    
+//     resetCursor(textArea, currentPos);
+// }
+
+tabKey.addEventListener('click', () => {
+    textArea.value += `\t`;
+    textArea.focus();
+});
+
+// textArea.onkeydown = function (event){
+//     console.log(event.code)
+//     if(event.code === 'Tab'){
+//         textArea.value += `\t`;
+//     }
+// }
+
+//Arrow key events on click
+
+
+const arrowUp = document.querySelector('.arrow-up');
+const arrowLeft = document.querySelector('.arrow-left');
+const arrowDown = document.querySelector('.arrow-down');
+const arrowRight = document.querySelector('.arrow-right');
+arrowUp.addEventListener('click', () =>{
+    textArea.value += `\u{2B06}`;
+    textArea.focus();
+})
+arrowLeft.addEventListener('click', () =>{
+    textArea.value += `\u{2B05}`;
+    textArea.focus();
+})
+arrowDown.addEventListener('click', () =>{
+    textArea.value += `\u{2B07}`;
+    textArea.focus();
+})
+arrowRight.addEventListener('click', () =>{
+    textArea.value += `\u{27A1}`;
+    textArea.focus();
+})
 
 // Keys lighter on click
 
