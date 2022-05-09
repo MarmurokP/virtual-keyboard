@@ -10,13 +10,23 @@ const engKeysObj = [
     {"1":"", "2":"", "3":"", "4":"", "5":"", "6":"", "7":"", "8":"", "9":"", "10":":", "11":"\""},
     {"1":"z", "2":"x", "3":"c", "4":"v", "5":"b", "6":"n", "7":"m", "8":",", "9":".", "10":"/"},
     {"1":"", "2":"", "3":"", "4":"", "5":"", "6":"", "7":"", "8":"<", "9":">", "10":"?"}
-]
+];
+const ruKeysObj = [
+    {"0":"", "1":"!", "2":"\"", "3":"№", "4":";", "5":"%", "6":":", "7":"?", "8":"*", "9":"(", "10":")", "11":"_", "12":"+"},
+    {"0":"ё", "1":"1", "2":"2", "3":"3", "4":"4", "5":"5", "6":"6", "7":"7", "8":"8", "9":"9", "10":"0", "11":"-", "12":"="},
+    {"1":"й", "2":"ц", "3":"у", "4":"к", "5":"е", "6":"н", "7":"г", "8":"ш", "9":"щ", "10":"з", "11":"х", "12":"ъ", "13":"\\"},
+    {"1":"", "2":"", "3":"", "4":"", "5":"", "6":"", "7":"", "8":"", "9":"", "10":"", "11":"", "12":"", "13":"|"},
+    {"1":"ф", "2":"ы", "3":"в", "4":"а", "5":"п", "6":"р", "7":"о", "8":"л", "9":"д", "10":"ж", "11":"э"},
+    {"1":"", "2":"", "3":"", "4":"", "5":"", "6":"", "7":"", "8":"", "9":"", "10":"", "11":""},
+    {"1":"я", "2":"ч", "3":"с", "4":"м", "5":"и", "6":"т", "7":"ь", "8":"б", "9":"ю", "10":"."},
+    {"1":"", "2":"", "3":"", "4":"", "5":"", "6":"", "7":"", "8":"", "9":"", "10":","}
+];
  const header = document.createElement('header');
  const main = document.createElement('main');
  const footer = document.createElement('footer');
  const wrapper = document.createElement('div');
  const headerWrapper = document.createElement('div');
- const keysObj = engKeysObj; 
+ let keysObj = engKeysObj; 
 
  headerWrapper.className = 'wrapper header-wrapper';
  wrapper.className = 'wrapper';
@@ -36,6 +46,7 @@ const keyboard = document.createElement('div');
 keyboard.className = 'keyboard';
 wrapper.appendChild(keyboard);
  
+//Fill the keybord field
 
 for (let i = 0; i < 5; i++){  
     const keyboardRow = document.createElement('div'); 
@@ -44,7 +55,6 @@ for (let i = 0; i < 5; i++){
 }
 
 const keyboardRowArr = document.querySelectorAll('.keyboard-row');
-
 
 for(let i = 0; i < 14; i++){
     const key = document.createElement('div');
@@ -92,15 +102,14 @@ for(let i = 0; i < 13; i++){
             key.innerHTML = `<p class="key-case active-key">${keysObj[6][i]}</p>`;
         }; 
     };
-};    
-
+};  
 
 for(let i = 0; i < 9; i++){
     const key = document.createElement('div');
     key.className = 'key';
     keyboardRowArr[4].appendChild(key);    
 };
-
+ 
 
 const keysArr = document.querySelectorAll('.key');
 const keyCase = document.querySelectorAll('.key-case');
@@ -142,6 +151,18 @@ keysArr[62].className = 'key arrow arrow-right';
 keysArr[62].innerHTML = `<p class='speckey' id='ArrowRight'>&rarr;</p>`;
 keysArr[63].className = 'key ctrl';
 keysArr[63].innerHTML = `<p class='speckey' id='ControlRight'>Ctrl</p>`;
+
+//Change keybord lang
+
+window.addEventListener('keydown', function (event) {
+    if (event.altKey && event.ctrlKey) {
+        
+       keysObj = ruKeysObj;
+            
+       }
+       clearKeyboardFilds();
+});
+
 
 // Switching upper and lower case
 
@@ -300,12 +321,6 @@ tabKey.addEventListener('click', () => {
     textArea.focus();
 });
 
-// textArea.onkeydown = function (event){
-//     console.log(event.code)
-//     if(event.code === 'Tab'){
-//         textArea.value += `\t`;
-//     }
-// }
 
 //Arrow key events on click
 
@@ -375,4 +390,3 @@ function printFromVirtKeyboard(){
 };
 
 printFromVirtKeyboard();
-
