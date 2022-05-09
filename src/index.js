@@ -26,6 +26,8 @@ const ruKeysObj = [
  const footer = document.createElement('footer');
  const wrapper = document.createElement('div');
  const headerWrapper = document.createElement('div');
+ 
+ let activeKeys = [];
  let keysObj = engKeysObj; 
 
  headerWrapper.className = 'wrapper header-wrapper';
@@ -45,6 +47,7 @@ wrapper.append(textArea);
 const keyboard = document.createElement('div');
 keyboard.className = 'keyboard';
 wrapper.appendChild(keyboard);
+ 
  
 //Fill the keybord field
 
@@ -113,7 +116,7 @@ for(let i = 0; i < 9; i++){
 
 const keysArr = document.querySelectorAll('.key');
 const keyCase = document.querySelectorAll('.key-case');
-let activeKeys = document.querySelectorAll('.active-key');
+activeKeys = document.querySelectorAll('.active-key');
 
 
 keysArr[13].className = 'key backspace';
@@ -154,15 +157,22 @@ keysArr[63].innerHTML = `<p class='speckey' id='ControlRight'>Ctrl</p>`;
 
 //Change keybord lang
 
-window.addEventListener('keydown', function (event) {
-    if (event.altKey && event.ctrlKey) {
-        
-       keysObj = ruKeysObj;
-            
-       }
-       clearKeyboardFilds();
-});
+let langIsEng = true;
 
+window.addEventListener('keydown', function (event) {
+    if (event.shiftKey && event.ctrlKey) { 
+        if(langIsEng){
+            keysObj = ruKeysObj;
+            langIsEng = false;
+        } else {
+            keysObj = engKeysObj;
+            langIsEng = true;
+        }      
+                         
+       }
+       reloadKeyboardFilds();
+      
+});
 
 // Switching upper and lower case
 
@@ -390,3 +400,39 @@ function printFromVirtKeyboard(){
 };
 
 printFromVirtKeyboard();
+
+function reloadKeyboardFilds(){      
+    for(let i = 0; i < 13; i++){        
+            keyboardRowArr[0].children[i].children[0].textContent = `${keysObj[0][i]}`;             
+            keyboardRowArr[0].children[i].children[2].textContent = `${keysObj[1][i]}`;             
+    };
+    
+    for(let i = 1; i < 14; i++){                 
+            if(i > 10){
+                keyboardRowArr[1].children[i].children[0].textContent = `${keysObj[3][i]}`;
+                keyboardRowArr[1].children[i].children[2].textContent = `${keysObj[2][i]}`;
+            } else {
+                keyboardRowArr[1].children[i].children[0].textContent = `${keysObj[2][i]}`;
+            };         
+    };
+    
+    for(let i = 1; i < 12; i++){                 
+            if(i > 9){
+                keyboardRowArr[2].children[i].children[0].textContent = `${keysObj[5][i]}`;
+                keyboardRowArr[2].children[i].children[2].textContent = `${keysObj[4][i]}`;
+            } else {
+                keyboardRowArr[2].children[i].children[0].textContent = `${keysObj[4][i]}`;
+            };       
+    };
+    
+    for(let i = 1; i < 11; i++){       
+            if(i > 7){
+                keyboardRowArr[3].children[i].children[0].textContent = `${keysObj[7][i]}`;
+                keyboardRowArr[3].children[i].children[2].textContent = `${keysObj[6][i]}`;
+            } else {
+                keyboardRowArr[3].children[i].children[0].textContent = `${keysObj[6][i]}`;
+            };         
+    };   
+    
+    
+};
