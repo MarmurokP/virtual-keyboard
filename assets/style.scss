@@ -125,7 +125,8 @@ h1{
             } 
             &:active{
                 transition: .3s;
-                background-color: rgb(107, 62, 62);               
+                background-color: rgb(107, 62, 62); 
+                transform: translate(1px, 2px);             
             }          
         }        
         .up-row{

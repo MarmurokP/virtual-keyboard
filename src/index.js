@@ -27,7 +27,6 @@ const ruKeysObj = [
  const wrapper = document.createElement('div');
  const headerWrapper = document.createElement('div');
  
- let activeKeys = [];
  let keysObj = engKeysObj; 
 
  headerWrapper.className = 'wrapper header-wrapper';
@@ -116,7 +115,7 @@ for(let i = 0; i < 9; i++){
 
 const keysArr = document.querySelectorAll('.key');
 const keyCase = document.querySelectorAll('.key-case');
-activeKeys = document.querySelectorAll('.active-key');
+const activeKeys = document.querySelectorAll('.active-key');
 
 
 keysArr[13].className = 'key backspace';
@@ -211,8 +210,7 @@ function rowSwiching(){
     downRowKeys.forEach((el) => {
         el.classList.toggle('active-key');
     })
-    switchCase();
-    activeKeys = document.querySelectorAll('.active-key');  
+    switchCase();     
 }
 
 leftShift.addEventListener('click', rowSwiching);
@@ -364,12 +362,14 @@ document.onkeydown = function (event) {
     specKeys.forEach((el) => {
         if(el.id === event.code){
             el.closest('.key').style.backgroundColor = 'rgb(107, 62, 62)';
+            el.closest('.key').style.transform = 'translate(1px, 2px)';
         }
     })
 
 activeKeys.forEach((el) => {
     if(el.textContent === event.key){
         el.closest('.key').style.backgroundColor = 'rgb(107, 62, 62)';
+        el.closest('.key').style.transform = 'translate(1px, 2px)';
     }        
 })
 }
@@ -377,12 +377,14 @@ activeKeys.forEach((el) => {
 document.onkeyup = function (event) {
     specKeys.forEach((el) => {
         if(el.id === event.code){
-            el.closest('.key').style.backgroundColor = 'rgb(41, 40, 40)';
+            el.closest('.key').style.backgroundColor = '';
+            el.closest('.key').style.transform = '';
         }
     })
     activeKeys.forEach((el) => {
         if(el.textContent === event.key){
-            el.closest('.key').style.backgroundColor = 'rgb(82, 82, 82)';
+            el.closest('.key').style.backgroundColor = '';
+            el.closest('.key').style.transform = '';
         }        
     })
 }  
