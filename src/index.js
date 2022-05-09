@@ -46,6 +46,11 @@ wrapper.append(textArea);
 const keyboard = document.createElement('div');
 keyboard.className = 'keyboard';
 wrapper.appendChild(keyboard);
+
+const descriptionTag = document.createElement('div');
+descriptionTag.className = 'description-tag';
+wrapper.appendChild(descriptionTag);
+descriptionTag.innerHTML = `<p>Keyboard was created in OS Windows</p><p>To change language, press "Shift + Ctrl"</p>`
  
  
 //Fill the keybord field
@@ -115,7 +120,9 @@ for(let i = 0; i < 9; i++){
 
 const keysArr = document.querySelectorAll('.key');
 const keyCase = document.querySelectorAll('.key-case');
-const activeKeys = document.querySelectorAll('.active-key');
+let activeKeys = document.querySelectorAll('.active-key');
+const upRowKeys = document.querySelectorAll('.up-row');
+const downRowKeys = document.querySelectorAll('.down-row');
 
 
 keysArr[13].className = 'key backspace';
@@ -199,8 +206,7 @@ document.addEventListener('keydown', (event) => {
 
 const leftShift = document.querySelector('.shift-left');
 const rightShift = document.querySelector('.shift-right');
-const upRowKeys = document.querySelectorAll('.up-row');
-const downRowKeys = document.querySelectorAll('.down-row');
+
 let down = false;
 
 function rowSwiching(){
@@ -210,7 +216,8 @@ function rowSwiching(){
     downRowKeys.forEach((el) => {
         el.classList.toggle('active-key');
     })
-    switchCase();     
+    switchCase();
+    activeKeys = document.querySelectorAll('.active-key');     
 }
 
 leftShift.addEventListener('click', rowSwiching);
@@ -297,8 +304,7 @@ deletKey.addEventListener('click', deletClick);
 const spaceKey = document.querySelector('.space');
 
 spaceKey.addEventListener('click', () => {    
-    textArea.value += " ";
-    textArea.focus();
+   printSpecSymbol(' ');
 });
 
 // Enter key click add
@@ -306,32 +312,17 @@ spaceKey.addEventListener('click', () => {
 const enterKey = document.querySelector('.enter');
 
 enterKey.addEventListener('click', () => {
-    textArea.value += `\n`;
-    textArea.focus();
+   printSpecSymbol('\n');
 });
 
 //Tab key click add
 
 const tabKey = document.querySelector('.tab');
-
-// function tabClick() {
-//     let currentPos = getCaret(textArea);    
-//     let text = textArea.value;
-//     let tabSpace = text.substr(0, currentPos) + text.substr(currentPos, text.length);
-
-//     textArea.value = tabSpace;
-    
-//     resetCursor(textArea, currentPos);
-// }
-
 tabKey.addEventListener('click', () => {
-    textArea.value += `\t`;
-    textArea.focus();
+printSpecSymbol('\t');
 });
 
-
 //Arrow key events on click
-
 
 const arrowUp = document.querySelector('.arrow-up');
 const arrowLeft = document.querySelector('.arrow-left');
@@ -391,14 +382,12 @@ document.onkeyup = function (event) {
 
 // Print from VirtualKeyboard
 
-function printFromVirtKeyboard(){   
+function printFromVirtKeyboard(){     
     activeKeys.forEach((button, index) => {
         button.closest('.key').addEventListener('click', () => {
-        textArea.value += `${activeKeys[index].textContent}`;
-        textArea.focus(); 
+            printSpecSymbol(activeKeys[index].textContent);
         });
-    });
-          
+    });       
 };
 
 printFromVirtKeyboard();
@@ -429,12 +418,20 @@ function reloadKeyboardFilds(){
     
     for(let i = 1; i < 11; i++){       
             if(i > 7){
-                keyboardRowArr[3].children[i].children[0].textContent = `${keysObj[7][i]}`;
                 keyboardRowArr[3].children[i].children[2].textContent = `${keysObj[6][i]}`;
+                keyboardRowArr[3].children[i].children[0].textContent = `${keysObj[7][i]}`;
             } else {
                 keyboardRowArr[3].children[i].children[0].textContent = `${keysObj[6][i]}`;
             };         
-    };   
-    
-    
+    };     
+};
+
+function printSpecSymbol(printSymbol){    
+    let startPosition = textArea.selectionStart;
+    let endPosition = textArea.selectionEnd;
+    let textPrinting = textArea.value.substring(0, startPosition) + `${printSymbol}` + textArea.value.substring(endPosition);    
+
+    textArea.value = textPrinting;
+    textArea.focus();
+    resetCursor(textArea, endPosition+1);
 };
