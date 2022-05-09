@@ -1,4 +1,4 @@
-import '../assets/style.css';
+import "../assets/style.css";
 import "../assets/style.scss";
 
 const engKeysObj = [
@@ -37,7 +37,6 @@ const ruKeysObj = [
  headerWrapper.innerHTML = '<h1>Virtual Keyboard</h1>';
  header.append(headerWrapper);
  main.append(wrapper);
-//  footer.append(wrapper);
 
 const textArea = document.createElement('textarea');
 textArea.className = 'text-area';

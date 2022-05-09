@@ -6,13 +6,15 @@
   "scripts": {
     "watch": "webpack --watch",
     "build": "webpack",
-    "live-server": "webpack serve --open"
+    "live-server": "webpack serve --open",
+    "lint:watch": "esw main.js -w"
   },
   "author": "MarmurokP",
   "license": "ISC",
   "devDependencies": {
     "css-loader": "^6.7.1",
     "eslint": "^8.14.0",
+    "eslint-watch": "^8.0.0",
     "html-webpack-plugin": "^5.5.0",
     "sass": "^1.51.0",
     "sass-loader": "^12.6.0",
